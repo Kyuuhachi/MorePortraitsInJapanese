@@ -96,6 +96,11 @@ fn merge(game: CliGame, name: &str, p: &Scena, jp: &Scena) -> Scena {
 					($v:ident TString) => {
 						t.push(T::TString($v.clone()));
 					},
+					($v:ident Vec<TString>) => {
+						for f in $v.iter() {
+							t.push(T::TString(f.clone()));
+						}
+					},
 					($i:ident $($t:tt)*) => {}
 				}
 				themelios::scena::code::introspect!(run);
@@ -217,9 +222,16 @@ fn merge(game: CliGame, name: &str, p: &Scena, jp: &Scena) -> Scena {
 						}
 					},
 					($v:ident TString) => {
-						let Some(T::TString(f)) = t.get(j) else { panic!("[{name}:{i}:{j}] expected TString: {:?} ⇒ {:?}", $v, t.get(j)); };
+						let Some(T::TString(g)) = t.get(j) else { panic!("[{name}:{i}:{j}] expected TString: {:?} ⇒ {:?}", $v, t.get(j)); };
 						j += 1;
-						*$v = f.clone();
+						*$v = g.clone();
+					},
+					($v:ident Vec<TString>) => {
+						for f in $v.iter_mut() {
+							let Some(T::TString(g)) = t.get(j) else { panic!("[{name}:{i}:{j}] expected TString: {:?} ⇒ {:?}", $v, t.get(j)); };
+							j += 1;
+							*f = g.clone();
+						}
 					},
 					($i:ident $($t:tt)*) => {}
 				}
@@ -269,6 +281,7 @@ fn insert_portrait(a: &mut Vec<TextSegment>, b: &[TextSegment]) {
 		println!("{:?}", jp);
 		println!();
 	}
+
 	*a = str2text(&jp);
 }
 
