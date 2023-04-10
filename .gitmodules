@@ -1,0 +1,6 @@
+[submodule "MorePortraitsInZero"]
+	path = MorePortraitsInZero
+	url = https://github.com/shinkiseki/MorePortraitsInZero/
+[submodule "MorePortraitsInAzure"]
+	path = MorePortraitsInAzure
+	url = https://github.com/shinkiseki/MorePortraitsInAzure/
