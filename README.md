@@ -1,4 +1,4 @@
-# 零／碧での追加の顔
+# 零・碧での追加の顔
 ###### More Portraits in Japanese
 
 A tool that merges ShinKiseki's [*More Portraits in Zero*](https://github.com/shinkiseki/MorePortraitsInZero) and
