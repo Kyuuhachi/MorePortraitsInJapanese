@@ -6,7 +6,7 @@ use std::fs;
 use clap::Parser;
 use regex::Regex;
 
-use themelios::scena::ed7::{Scena, read as read_scena, write as write_scena};
+use themelios::scena::ed7::Scena;
 use themelios::scena::code::{Insn, FlatInsn};
 use themelios::text::TextSegment;
 use themelios::types::TString;
@@ -52,10 +52,10 @@ fn main() -> anyhow::Result<()> {
 		let p2 = cli.japanese.join("data/scena").join(p.file_name().unwrap());
 		let p3 = cli.out.join("scena").join(p.file_name().unwrap());
 
-		let scena_p = read_scena(game, &std::fs::read(&p)?)?;
-		let scena_jp = read_scena(game, &std::fs::read(&p2)?)?;
+		let scena_p = Scena::read(game, &std::fs::read(&p)?)?;
+		let scena_jp = Scena::read(game, &std::fs::read(&p2)?)?;
 		let scena = merge(cli.which, name, &scena_p, &scena_jp);
-		std::fs::write(&p3, write_scena(game, &scena)?)?;
+		std::fs::write(&p3, Scena::write(game, &scena)?)?;
 	}
 
 	Ok(())
