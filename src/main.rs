@@ -181,13 +181,6 @@ fn merge(game: CliGame, name: &str, p: &Scena, jp: &Scena) -> Scena {
 					);
 				},
 				("t1650", 4) => assert_eq!(t.remove(5), ts("女医")),
-				("t2520", 20) => {
-					// interim until Shin fixes it
-					let T::Text(b) = t.remove(8) else { panic!() };
-					let T::Text(a) = &mut t[7] else { panic!() };
-					a.push(TextSegment::Byte(0x03)); // page
-					a.extend(b);
-				}
 				("t2520", 22) => {
 					t.insert(23, t[19].clone());
 					t.insert(24, t[20].clone());
